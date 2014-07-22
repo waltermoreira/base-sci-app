@@ -1,3 +1,5 @@
+# Base image for scientific apps at TACC
+
 FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
