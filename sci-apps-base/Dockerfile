@@ -4,13 +4,20 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
-
 ADD init.sh /usr/local/bin/init.sh
-RUN chmod +x /usr/local/bin/init.sh
 ADD supervisor.conf /etc/supervisor.conf
-RUN mkdir /etc/supervisor.d
-ADD sshd.conf /etc/supervisor.d/sshd.conf
+ADD intro.py /usr/local/bin/intro.py
+ADD metadata.yml /etc/metadata.yml
+
+RUN pip install PyYAML
+RUN chmod +x /usr/local/bin/init.sh \
+             /usr/local/bin/intro.py
 RUN mkdir /var/log/supervisor
 
-CMD []
+RUN mkdir /etc/supervisor.d
+ADD sshd.conf /etc/supervisor.d/sshd.conf
+
+RUN mkdir /etc/metadata.d
+
+CMD ["/usr/local/bin/intro.py"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
