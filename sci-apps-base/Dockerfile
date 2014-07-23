@@ -6,12 +6,12 @@ MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
 ADD init.sh /usr/local/bin/init.sh
 ADD supervisor.conf /etc/supervisor.conf
-ADD intro.py /usr/local/bin/intro.py
+ADD intro.py /usr/local/bin/intro
 ADD metadata.yml /etc/metadata.yml
 
 RUN pip install PyYAML
 RUN chmod +x /usr/local/bin/init.sh \
-             /usr/local/bin/intro.py
+             /usr/local/bin/intro
 RUN mkdir /var/log/supervisor
 
 RUN mkdir /etc/supervisor.d
@@ -19,5 +19,5 @@ ADD sshd.conf /etc/supervisor.d/sshd.conf
 
 RUN mkdir /etc/metadata.d
 
-CMD ["/usr/local/bin/intro.py"]
+CMD ["/usr/local/bin/intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
