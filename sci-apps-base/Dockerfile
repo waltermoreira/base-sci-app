@@ -11,9 +11,7 @@ ADD python /tmp/python
 RUN pip install PyYAML requests
 RUN pip install /tmp/python/
 
-RUN chmod +x /usr/local/bin/init.sh \
-             /usr/local/bin/intro \
-             /usr/local/bin/ping.py
+RUN chmod +x /usr/local/bin/init.sh
 
 RUN mkdir /var/log/supervisor
 RUN mkdir /etc/supervisor.d
@@ -22,5 +20,5 @@ ADD sshd.conf /etc/supervisor.d/sshd.conf
 ADD metadata.yml /etc/metadata.yml
 RUN mkdir /etc/metadata.d
 
-CMD ["/usr/local/bin/intro"]
+CMD ["intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
