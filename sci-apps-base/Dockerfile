@@ -4,6 +4,10 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
+# URL of the server to which the containers will send metadata on
+# start-up
+ENV SERVER_URL http://192.168.59.3:5000
+
 ADD init.sh /usr/local/bin/init.sh
 ADD supervisor.conf /etc/supervisor.conf
 

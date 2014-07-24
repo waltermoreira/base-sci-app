@@ -9,7 +9,7 @@ import metadata
 
 import requests
 
-SERVER_URL = 'http://192.168.59.3:5000'
+SERVER_URL = os.environ['SERVER_URL']
 DISALLOW_PING = '/etc/NO_PING'
 
 
