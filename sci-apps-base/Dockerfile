@@ -12,7 +12,8 @@ ADD metadata.yml /etc/metadata.yml
 
 RUN pip install PyYAML
 RUN chmod +x /usr/local/bin/init.sh \
-             /usr/local/bin/intro
+             /usr/local/bin/intro \
+             /usr/local/bin/ping.py
 RUN mkdir /var/log/supervisor
 
 RUN mkdir /etc/supervisor.d
