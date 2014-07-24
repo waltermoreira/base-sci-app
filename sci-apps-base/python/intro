@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+import optparse
+import sys
+
+import yaml
+
+from metadata import get_metadata
+
+
+ROOT = '/etc/metadata.yml'
+BASE = '/etc/metadata.d'
+
+
+def show_all():
+    print "Full metadata:"
+    print '---'
+    print yaml.dump(get_metadata(), default_flow_style=False)
+
+
+def main():
+    parser = optparse.OptionParser()
+    parser.add_option('-v', '--version', dest='version',
+                      action='store_true',
+                      help='display version of the container')
+    options, _ = parser.parse_args()
+    if options.version:
+        md = get_metadata()
+        try:
+            print '%s (version %s)' % (md['metadata']['name'],
+                                       md['metadata']['version'])
+        except KeyError:
+            print 'no version info'
+        return 0
+    show_all()
+
+
+if __name__ == '__main__':
+    sys.exit(main())
