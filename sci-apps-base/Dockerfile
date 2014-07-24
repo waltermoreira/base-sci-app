@@ -7,6 +7,7 @@ MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 ADD init.sh /usr/local/bin/init.sh
 ADD supervisor.conf /etc/supervisor.conf
 ADD intro.py /usr/local/bin/intro
+ADD ping.py /usr/local/bin/ping.py
 ADD metadata.yml /etc/metadata.yml
 
 RUN pip install PyYAML
