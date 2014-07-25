@@ -4,6 +4,9 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
+ENV LICENSE MIT
+ENV DEVELOPER foo bar
+
 # URL of the server to which the containers will send metadata on
 # start-up
 ENV SERVER_URL http://192.168.59.3:5000
