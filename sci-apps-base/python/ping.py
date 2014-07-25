@@ -10,11 +10,10 @@ import metadata
 import requests
 
 SERVER_URL = os.environ['SERVER_URL']
-DISALLOW_PING = '/etc/NO_PING'
 
 
 def ping_allowed():
-    return not os.path.exists(DISALLOW_PING)
+    return not os.environ.get('NO_PING', False)
 
 
 def do_ping():
