@@ -4,6 +4,9 @@ import traceback
 
 import yaml
 
+# Variables with this prefix are considered metadata
+PREFIX = '_'
+
 ROOT = '/etc/metadata.yml'
 BASE = '/etc/metadata.d'
 

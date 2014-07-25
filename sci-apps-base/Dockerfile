@@ -4,8 +4,8 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
-ENV LICENSE MIT
-ENV DEVELOPER foo bar
+ENV _LICENSE MIT
+ENV _DEVELOPER foo bar
 
 # URL of the server to which the containers will send metadata on
 # start-up
@@ -23,9 +23,6 @@ RUN chmod +x /usr/local/bin/init.sh
 RUN mkdir /var/log/supervisor
 RUN mkdir /etc/supervisor.d
 ADD sshd.conf /etc/supervisor.d/sshd.conf
-
-ADD metadata.yml /etc/metadata.yml
-RUN mkdir /etc/metadata.d
 
 CMD ["intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
