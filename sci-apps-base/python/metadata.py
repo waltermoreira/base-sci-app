@@ -1,44 +1,33 @@
 import os
-import stat
-import traceback
+import subprocess
 
-import yaml
+import requests
+
 
 # Variables with this prefix are considered metadata
 PREFIX = '_'
 
-ROOT = '/etc/metadata.yml'
-BASE = '/etc/metadata.d'
-
-
-def collect_files():
-    for root, dirs, files in os.walk(BASE):
-        for name in files:
-            filename = os.path.join(root, name)
-            st = os.stat(filename)
-            if stat.S_ISREG(st[stat.ST_MODE]):
-                yield filename, st[stat.ST_MTIME]
-
-
-def collect_metadata():
-    key = lambda x: x[1]
-    # iterate over .yml files sorted by modification time
-    for filename, _ in sorted(collect_files(), key=key):
-        if filename.endswith('.yml'):
-            yield read_yml(filename)
-
-
-def read_yml(filename):
-    try:
-        return yaml.load(open(filename))
-    except Exception:
-        print 'Metadata for', filename, 'could not be loaded'
-        traceback.print_exc()
-        return {}
-
 
 def get_metadata():
-    metadata = read_yml(ROOT)
-    for m in collect_metadata():
-        metadata.update(m)
+    metadata = {}
+    for k in os.environ:
+        if k.startswith(PREFIX):
+            metadata[k[1:]] = os.environ[k]
     return metadata
+
+
+def get_gateway():
+    outside_ip = subprocess.Popen(
+        'dig +short google.com'.split(),
+        stdout=subprocess.PIPE).communicate()[0].splitlines()[0]
+    gateway_line = subprocess.Popen(
+        'ip route get {0}'.format(outside_ip).split(),
+        stdout=subprocess.PIPE).communicate()[0].splitlines()[0]
+    return gateway_line.split()[2]
+
+
+def get_container_info():
+    url = 'http://{0}:2375/containers/{1}/json'.format(
+        get_gateway(), os.environ['HOSTNAME'])
+    all_info = requests.get(url).json()
+    return all_info

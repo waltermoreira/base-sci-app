@@ -8,10 +8,6 @@ import yaml
 from metadata import get_metadata
 
 
-ROOT = '/etc/metadata.yml'
-BASE = '/etc/metadata.d'
-
-
 def show_all():
     print "Full metadata:"
     print '---'
