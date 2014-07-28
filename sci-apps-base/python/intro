@@ -23,8 +23,8 @@ def main():
     if options.version:
         md = get_metadata()
         try:
-            print '%s (version %s)' % (md['metadata']['name'],
-                                       md['metadata']['version'])
+            print '%s (version %s)' % (md['NAME'],
+                                       md['VERSION'])
         except KeyError:
             print 'no version info'
         return 0
