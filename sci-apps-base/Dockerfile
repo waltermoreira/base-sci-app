@@ -4,8 +4,10 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
+ENV _NAME Scientific Apps Base Image
+ENV _AUTHOR Walter Moreira
 ENV _LICENSE MIT
-ENV _DEVELOPER foo bar
+ENV _VERSION 0.1
 
 # URL of the server to which the containers will send metadata on
 # start-up
