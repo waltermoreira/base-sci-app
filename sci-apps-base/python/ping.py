@@ -17,9 +17,11 @@ def ping_allowed():
 
 
 def do_ping():
-    md = metadata.get_metadata()
-    md['timestamp'] = datetime.datetime.now().isoformat(' ')
-    resp = requests.post(SERVER_URL, data=json.dumps(md),
+    d = {}
+    d['metadata'] = metadata.get_metadata()
+    d['info'] = metadata.get_container_info()
+    d['timestamp'] = datetime.datetime.now().isoformat(' ')
+    resp = requests.post(SERVER_URL, data=json.dumps(d),
                          headers={'Content-Type': 'application/json'})
 
 
