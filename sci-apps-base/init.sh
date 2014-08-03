@@ -1,4 +1,10 @@
 #!/bin/sh
 
 /usr/bin/supervisord -c /etc/supervisor.conf
-exec "$@"
+if [[ ("$#" -eq 0) || ("$1" =~ ^-.*) ]]; then
+    # no arguments, or something that looks like an option:
+    # redirect to 'intro' to show docs, etc.
+    exec intro "$@"
+else
+    exec "$@"
+fi
