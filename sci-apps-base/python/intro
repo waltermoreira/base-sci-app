@@ -9,9 +9,11 @@ from metadata import get_metadata
 
 
 def show_all():
-    print "Full metadata:"
-    print '---'
     print yaml.dump(get_metadata(), default_flow_style=False)
+
+
+def show_docs():
+    pass
 
 
 def main():
@@ -19,6 +21,15 @@ def main():
     parser.add_option('-v', '--version', dest='version',
                       action='store_true',
                       help='display version of the container')
+    parser.add_option('-m', '--metadata', dest='metadata',
+                      action='store_true',
+                      help='display metadata')
+    parser.add_option('-d', '--docs', dest='docs',
+                      action='store_true',
+                      help='display docs')
+    parser.add_option('-e', '--examples', dest='examples',
+                      action='store_true',
+                      help='display examples')
     options, _ = parser.parse_args()
     if options.version:
         md = get_metadata()
@@ -28,7 +39,7 @@ def main():
         except KeyError:
             print 'no version info'
         return 0
-    show_all()
+    show_docs()
 
 
 if __name__ == '__main__':
