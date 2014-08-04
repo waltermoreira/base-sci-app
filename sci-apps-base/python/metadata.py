@@ -27,7 +27,25 @@ def get_gateway():
 
 
 def get_container_info():
-    url = 'http://{0}:2375/containers/{1}/json'.format(
-        get_gateway(), os.environ['HOSTNAME'])
-    all_info = requests.get(url).json()
-    return all_info
+    url_template = 'http://{0}:{1}/containers/{2}/json'
+    url = url_template.format(get_gateway(), 2375, os.environ['HOSTNAME'])
+    try:
+        all_info = requests.get(url).json()
+    except requests.exceptions.ConnectionError:
+        # docker daemon doesn't seem to be listening in tcp
+        # see if socket is mounted in standard place
+        try:
+            sock = subprocess.Popen(
+                'socat -d -d TCP-L:8080,fork '
+                'UNIX:/var/run/docker.sock'.split())
+            all_info = requests.get(
+                url_template.format(
+                    '127.0.0.1', 8080, os.environ['HOSTNAME'])).json()
+        except requests.exceptions.ConnectionError:
+            all_info = {'hostname': os.environ['HOSTNAME']}
+        finally:
+            sock.kill()
+    return {
+        'container_info': all_info,
+        'metadata': get_metadata()
+    }
