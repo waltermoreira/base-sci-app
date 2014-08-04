@@ -1,5 +1,6 @@
 import os
 import subprocess
+import time
 
 import requests
 
@@ -38,6 +39,8 @@ def get_container_info():
             sock = subprocess.Popen(
                 'socat -d -d TCP-L:8080,fork '
                 'UNIX:/var/run/docker.sock'.split())
+            # give some time to start the tcp server for socket
+            time.sleep(1)
             all_info = requests.get(
                 url_template.format(
                     '127.0.0.1', 8080, os.environ['HOSTNAME'])).json()
