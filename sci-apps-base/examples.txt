@@ -1,0 +1,11 @@
+Examples
+========
+
+Using the app in a pipe
+-----------------------
+
+A dockerized app can be used in an standard Unix pipe, as long as the
+option `-i` is passed to the `run` command.  For example:
+
+    $ echo "Hi there" | docker run -i sci-apps-base cat
+    Hi there

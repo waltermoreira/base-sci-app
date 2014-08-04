@@ -5,7 +5,11 @@ Usage
 
         $ docker run -t sci-apps-base
 
-- To display the documentation:
+- To display examples:
+
+        $ docker run -t sci-apps-base -e
+
+- To display more comprehensive documentation:
 
         $ docker run -t sci-apps-base -d
 
