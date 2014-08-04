@@ -30,5 +30,9 @@ ADD sshd.conf /etc/supervisor.d/sshd.conf
 
 RUN yum install -y bind-utils socat
 
+ADD intro.txt docs/base/intro.txt
+ADD examples.txt docs/base/examples.txt
+ADD usage.txt docs/base/usage.txt
+
 CMD ["intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
