@@ -19,8 +19,9 @@ ADD init.sh /usr/local/bin/init.sh
 ADD supervisor.conf /etc/supervisor.conf
 
 ADD python /tmp/python
-RUN pip install PyYAML requests blessings
-RUN pip install /tmp/python/
+WORKDIR /root/python/bin
+RUN ./pip install PyYAML requests blessings
+RUN ./pip install /tmp/python/
 
 RUN chmod +x /usr/local/bin/init.sh
 
