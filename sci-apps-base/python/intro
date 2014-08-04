@@ -3,13 +3,19 @@
 import optparse
 import sys
 
+from blessings import Terminal
 import yaml
 
 from metadata import get_metadata
 
 
+t = Terminal()
+
+
 def show_metadata():
-    print yaml.dump(get_metadata(), default_flow_style=False)
+    for k, v in get_metadata().items():
+        print('{t.green}{k}: {t.cyan}{v}{t.normal}'
+              .format(t=t, k=k, v=v))
 
 
 def show_version():
@@ -18,7 +24,7 @@ def show_version():
         print '%s (version %s)' % (md['APP'],
                                    md['VERSION'])
     except KeyError:
-        print 'no version info'
+        print t.red('no version info')
 
 
 def show_docs():
