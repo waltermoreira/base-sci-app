@@ -32,10 +32,10 @@ def show_text(kind='intro', title='Docs'):
     for filename, image in metadata.get_files(kind=kind):
         title_len = len('{title} for {image}:'
                         .format(title=title, image=image))
-        print ('{t.bright_green}{line}{t.normal}\n'
-               '{t.bright_green}{title} for '
-               '{t.bright_cyan}{image}{t.bright_green}:{t.normal}'
-               '\n{t.bright_green}{line}{t.normal}'
+        print ('{t.green}{line}{t.normal}\n'
+               '{t.green}{title} for '
+               '{t.cyan}{image}{t.green}:{t.normal}'
+               '\n{t.green}{line}{t.normal}\n'
                .format(t=t, image=image, title=title, line='-'*title_len))
         print(open(filename).read())
 
