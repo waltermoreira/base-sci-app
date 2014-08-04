@@ -26,7 +26,7 @@ RUN mkdir /var/log/supervisor
 RUN mkdir /etc/supervisor.d
 ADD sshd.conf /etc/supervisor.d/sshd.conf
 
-RUN yum install -y bind-utils
+RUN yum install -y bind-utils socat
 
 CMD ["intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
