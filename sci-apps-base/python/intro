@@ -9,16 +9,16 @@ import yaml
 import metadata
 
 
-t = Terminal()
-
 
 def show_metadata():
+    t = Terminal()
     for k, v in metadata.get_metadata().items():
         print('{t.green}{k}: {t.cyan}{v}{t.normal}'
               .format(t=t, k=k, v=v))
 
 
 def show_version():
+    t = Terminal()
     md = metadata.get_metadata()
     try:
         print '%s (version %s)' % (md['APP'],
@@ -28,6 +28,7 @@ def show_version():
 
 
 def show_text(kind='intro', title='Docs'):
+    t = Terminal()
     for filename, image in metadata.get_files(kind=kind):
         title_len = len('{title} for {image}:'
                         .format(title=title, image=image))
