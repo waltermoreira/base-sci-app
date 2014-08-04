@@ -1,0 +1,22 @@
+Usage
+=====
+
+- To display the usage (this help):
+
+        $ docker run -t sci-apps-base
+
+- To display the documentation:
+
+        $ docker run -t sci-apps-base -d
+
+- To display metadata associated to the base image:
+
+        $ docker run -t sci-apps-base -m
+
+- To display available options for the base image:
+
+        $ docker run -t sci-apps-base -h
+
+- To run a command in the base image (e.g. a shell):
+
+        $ docker run -it sci-apps-base /bin/bash
