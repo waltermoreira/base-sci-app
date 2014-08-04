@@ -8,11 +8,28 @@ import yaml
 from metadata import get_metadata
 
 
-def show_all():
+def show_metadata():
     print yaml.dump(get_metadata(), default_flow_style=False)
 
 
+def show_version():
+    md = get_metadata()
+    try:
+        print '%s (version %s)' % (md['NAME'],
+                                   md['VERSION'])
+    except KeyError:
+        print 'no version info'
+
+
 def show_docs():
+    pass
+
+
+def show_examples():
+    pass
+
+
+def show_usage():
     pass
 
 
@@ -32,14 +49,18 @@ def main():
                       help='display examples')
     options, _ = parser.parse_args()
     if options.version:
-        md = get_metadata()
-        try:
-            print '%s (version %s)' % (md['NAME'],
-                                       md['VERSION'])
-        except KeyError:
-            print 'no version info'
+        show_version()
         return 0
-    show_docs()
+    if options.metadata:
+        show_metadata()
+        return 0
+    if options.docs:
+        show_docs()
+        return 0
+    if options.examples:
+        show_examples()
+        return 0
+    show_usage()
 
 
 if __name__ == '__main__':
