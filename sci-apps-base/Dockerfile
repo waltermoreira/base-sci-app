@@ -9,6 +9,8 @@ ENV _AUTHOR Walter Moreira
 ENV _LICENSE MIT
 ENV _VERSION 0.1
 
+ADD python27.tgz /root
+
 # URL of the server to which the containers will send metadata on
 # start-up
 ENV SERVER_URL http://192.168.59.3:5000
