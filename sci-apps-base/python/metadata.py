@@ -31,7 +31,7 @@ def get_container_info():
     url = url_template.format(get_gateway(), 2375, os.environ['HOSTNAME'])
     try:
         all_info = requests.get(url).json()
-    except requests.exceptions.ConnectionError:
+    except Exception:
         # docker daemon doesn't seem to be listening in tcp
         # see if socket is mounted in standard place
         try:
@@ -41,7 +41,7 @@ def get_container_info():
             all_info = requests.get(
                 url_template.format(
                     '127.0.0.1', 8080, os.environ['HOSTNAME'])).json()
-        except requests.exceptions.ConnectionError:
+        except Exception:
             all_info = {'hostname': os.environ['HOSTNAME']}
         finally:
             sock.kill()
