@@ -4,7 +4,7 @@ FROM agaveapi/centos-base
 
 MAINTAINER Walter Moreira <wmoreira@tacc.utexas.edu>
 
-ENV _NAME Scientific Apps Base Image
+ENV _APP Scientific Apps Base
 ENV _AUTHOR Walter Moreira
 ENV _LICENSE MIT
 ENV _VERSION 0.1
