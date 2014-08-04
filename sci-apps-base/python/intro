@@ -15,7 +15,7 @@ def show_metadata():
 def show_version():
     md = get_metadata()
     try:
-        print '%s (version %s)' % (md['NAME'],
+        print '%s (version %s)' % (md['APP'],
                                    md['VERSION'])
     except KeyError:
         print 'no version info'
