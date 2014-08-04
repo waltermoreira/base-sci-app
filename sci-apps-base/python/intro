@@ -6,20 +6,20 @@ import sys
 from blessings import Terminal
 import yaml
 
-from metadata import get_metadata
+import metadata
 
 
 t = Terminal()
 
 
 def show_metadata():
-    for k, v in get_metadata().items():
+    for k, v in metadata.get_metadata().items():
         print('{t.green}{k}: {t.cyan}{v}{t.normal}'
               .format(t=t, k=k, v=v))
 
 
 def show_version():
-    md = get_metadata()
+    md = metadata.get_metadata()
     try:
         print '%s (version %s)' % (md['APP'],
                                    md['VERSION'])
@@ -27,16 +27,28 @@ def show_version():
         print t.red('no version info')
 
 
+def show_text(kind='intro', title='Docs'):
+    for filename, image in metadata.get_files(kind=kind):
+        title_len = len('{title} for {image}:'
+                        .format(title=title, image=image))
+        print ('{t.bright_green}{line}{t.normal}\n'
+               '{t.bright_green}{title} for '
+               '{t.bright_cyan}{image}{t.bright_green}:{t.normal}'
+               '\n{t.bright_green}{line}{t.normal}'
+               .format(t=t, image=image, title=title, line='-'*title_len))
+        print(open(filename).read())
+
+
 def show_docs():
-    pass
+    show_text()
 
 
 def show_examples():
-    pass
+    show_text('examples', 'Examples')
 
 
 def show_usage():
-    pass
+    show_text('usage', 'Usage')
 
 
 def main():
