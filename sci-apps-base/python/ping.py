@@ -1,4 +1,4 @@
-#!/root/python/bin/python2.7 python
+#!/root/python/bin/python2.7
 
 import json
 import os
