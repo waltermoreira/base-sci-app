@@ -69,7 +69,7 @@ def collect_files():
 def get_files(kind='intro'):
     key = lambda x: x[1]
     # iterate over files sorted by modification time
-    for filename, _ in sorted(collect_files(), key=key, reverse=True):
+    for filename, _ in sorted(collect_files(), key=key):
         dir, name = os.path.split(filename)
         if name.startswith(kind):
             yield filename, os.path.basename(dir)
