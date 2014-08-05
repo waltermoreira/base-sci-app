@@ -8,3 +8,47 @@ Using the base image
 
 Extending the base image
 ------------------------
+
+To create an app using this base image, create a `Dockerfile` as
+follows:
+
+    FROM sci-apps-base
+
+    ENV _APP my_app
+    ENV _AUTHOR myself
+    ENV _LICENSE GPL
+    ENV _VERSION 0.1
+
+    # any other variables prepended by _ are considered metadata (optional)
+    ENV _FOO 3
+
+    # Add documentation (optional)
+
+    # `usage.txt` will be displayed when called with no arguments
+    ADD usage.txt /docs/my_app/usage.txt
+    # `intro.txt` will be displayed when called with option -d
+    ADD intro.txt /docs/my_app/intro.txt
+    # `examples.txt` will be displayed when called with option -e
+    ADD examples.txt /docs/my_app/examples.txt
+
+    # App will ping to TACC server to collect analytics
+    # Disable this feature with NO_PING=1
+    ENV NO_PING 0
+
+    # ---
+    # Build/install your app here
+    # ---
+
+    # No CMD or ENTRYPOINT is necessary
+
+To run daemons inside the container, write a file
+`my_app_daemon.conf`:
+
+    [program:my_app_daemon]
+    command = /bin/my_app_daemon
+    autostart = true
+    autorestart = true
+
+and add a line to the `Dockerfile`:
+
+    ADD my_app_daemon.conf /etc/supervisor.d/my_app_daemon.conf
