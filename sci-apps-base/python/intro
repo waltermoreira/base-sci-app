@@ -1,6 +1,7 @@
 #!/root/python/bin/python2.7
 
 import optparse
+import subprocess
 import sys
 
 from blessings import Terminal
@@ -8,6 +9,10 @@ import yaml
 
 import metadata
 
+
+def output(stream):
+    less = subprocess.Popen(['less', '-r'], stdin=subprocess.PIPE)
+    less.communicate(stream)
 
 
 def show_metadata():
@@ -32,24 +37,24 @@ def show_text(kind='intro', title='Docs'):
     for filename, image in metadata.get_files(kind=kind):
         title_len = len('{title} for {image}:'
                         .format(title=title, image=image))
-        print ('{t.green}{line}{t.normal}\n'
+        yield ('{t.green}{line}{t.normal}\n'
                '{t.green}{title} for '
                '{t.cyan}{image}{t.green}:{t.normal}'
                '\n{t.green}{line}{t.normal}\n'
                .format(t=t, image=image, title=title, line='-'*title_len))
-        print(open(filename).read())
+        yield open(filename).read()
 
 
 def show_docs():
-    show_text()
+    output('\n'.join(show_text()))
 
 
 def show_examples():
-    show_text('examples', 'Examples')
+    output('\n'.join(show_text('examples', 'Examples')))
 
 
 def show_usage():
-    show_text('usage', 'Usage')
+    output('\n'.join(show_text('usage', 'Usage')))
 
 
 def main():
