@@ -1,6 +1,7 @@
 #!/bin/sh
 
 export PATH=$PATH:/root/python/bin
+export PATH=$PATH:$EXTRA_PATH
 
 /usr/bin/supervisord -c /etc/supervisor.conf
 if [[ ("$#" -eq 0) || ("$1" =~ ^-.*) ]]; then
