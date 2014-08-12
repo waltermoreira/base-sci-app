@@ -35,5 +35,7 @@ ADD intro.txt /docs/base/intro.txt
 ADD examples.txt /docs/base/examples.txt
 ADD usage.txt /docs/base/usage.txt
 
+VOLUME /data
+
 CMD ["intro"]
 ENTRYPOINT ["/usr/local/bin/init.sh"]
